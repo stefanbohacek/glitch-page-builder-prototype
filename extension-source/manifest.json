@@ -1,0 +1,75 @@
+{
+  "name": "Simple Page Builder",
+  "version": "1.0.0",
+  "description": "A page builder in a browser extension.",
+  "homepage_url": "https://simplepagebuilder.app/",
+  "manifest_version": 3,
+  "minimum_chrome_version": "74",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "permissions": [
+    "tabs"
+  ],
+  "host_permissions": ["*://*.glitch.com/*"],
+  "action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "scripts/modules/initEditor.js",
+        "scripts/modules/onElementAvailable.js",
+        "scripts/modules/getCodeMirrorInstance.js",
+        "scripts/modules/getUserToken.js",
+        "scripts/modules/ready.js",
+        "libs/grapesjs/0.21.9/grapes.min.js",
+        "libs/grapesjs/blocks/grapesjs-blocks-basic/1.0.2/index.js",
+        "libs/grapesjs/blocks/grapesjs-custom-code/1.0.2/index.js",
+        "libs/grapesjs/plugins/grapesjs-touch/0.1.1/grapesjs-touch.min.js",
+        "libs/grapesjs/presets/grapesjs-preset-webpage/1.0.2/index.js",
+        "libs/js-beautify/1.15.1/beautify-html.min.js",
+        "libs/cssbeautify/0.3.1/cssbeautify.js",
+        "libs/tourguide-js/0.0.9/tour.js"
+      ],
+      "matches": [
+        "https://*/*"
+      ],
+      "world": "MAIN",
+      "run_at" : "document_start"
+    },
+    {
+      "matches": ["*://*.glitch.com/edit/*"],
+      "js": [
+        "scripts/content.js"
+      ],
+      "css": [
+        "styles/styles.css",
+        "libs/grapesjs/0.21.9/grapes.min.css",
+        "libs/tourguide-js/0.0.9/css/tour.min.css"
+      ],
+      "world": "MAIN",
+      "run_at": "document_idle"      
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "scripts/main.js",
+        "scripts/modules/initEditor.js",
+        "scripts/modules/onElementAvailable.js",
+        "scripts/modules/getCodeMirrorInstance.js",
+        "scripts/modules/getUserToken.js",
+        "scripts/modules/ready.js",
+        "libs/*/*.js",
+        "libs/*/*.css"
+      ],
+      "matches": ["https://glitch.com/*"],
+      "use_dynamic_url": true
+    }
+  ]
+}
